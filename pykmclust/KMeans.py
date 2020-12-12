@@ -70,7 +70,7 @@ class KMeans(object):
                 assignment_pre = assignment_temp.copy()
                 # E step
                 for sample in range(n):  # go through samples
-                    cost = 10000.0
+                    cost = 10000000.0
                     for clust in range(k):  # for each sample, compute its distance to each cluster centroid
                         cost_temp = distance(data[sample,:], centroids_temp[clust,:])
                         if cost_temp < cost:
@@ -83,16 +83,16 @@ class KMeans(object):
                 niter += 1
                 if verbose: print("{} iterations completed.".format(niter))
                 
-        # compute the inertia
-        inertia_temp = 0.0
-        for sample in range(n):
-            inertia_temp = inertia_temp + distance(data[sample,:], centroids_temp[assignment_temp[sample],:])
-        
-        # keep the results with lowest inertia
-        if inertia_temp < inertia:
-            inertia = inertia_temp
-            assignment = assignment_temp
-            centroids = centroids_temp
+            # compute the inertia
+            inertia_temp = 0.0
+            for sample in range(n):
+                inertia_temp = inertia_temp + distance(data[sample,:], centroids_temp[assignment_temp[sample],:])
+            
+            # keep the results with lowest inertia
+            if inertia_temp < inertia:
+                inertia = inertia_temp
+                assignment = assignment_temp
+                centroids = centroids_temp
 
 
         return centroids, assignment, inertia
