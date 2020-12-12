@@ -24,7 +24,7 @@ class KMeans(object):
     
         self.k = k
         
-    def fit(self, data=None, distance=None, nruns=10, randomseed=None, verbose=False):
+    def fit(self, data=None, distance=None, nruns=5, randomseed=None, verbose=True):
         """
         Fitting k means using EM algorithm.
 
@@ -50,13 +50,13 @@ class KMeans(object):
         """
 
         if not randomseed:
-            np.random.seed(int(time.time())
+            np.random.seed(int(time.time()))
         else:
             np.random.seed(int(randomseed))
             
         n = data.shape[0]  # number of FC frames
 
-        inertia = 100000000
+        inertia = 1000000000
         centroids = data[np.random.choice(n,self.k,replace=False),:]  # randomly initialize centroids
         assignment = np.random.choice(self.k, n, replace=True)  # randomly initialize assignments
 
