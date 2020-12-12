@@ -10,6 +10,9 @@ def manhattan(x,y):
     
 def correlation(x, y):
     return 1.0 - pearsonr(x,y)[0]
+    
+def cosine(x,y):
+    return x.dot(y)/(np.linalg.norm(x)*np.linalg.norm(y))
 
 class KMeans(object):
     def __init__(self, k):
@@ -24,7 +27,7 @@ class KMeans(object):
     
         self.k = k
         
-    def fit(self, data=None, distance=None, nruns=5, randomseed=None, verbose=True):
+    def fit(self, data=None, distance=euclidean, nruns=5, randomseed=None, verbose=True):
         """
         Fitting k means using EM algorithm.
 
@@ -71,7 +74,7 @@ class KMeans(object):
                 # E step
                 for sample in range(n):  # go through samples
                     cost = 10000000.0
-                    for clust in range(k):  # for each sample, compute its distance to each cluster centroid
+                    for clust in range(self.k):  # for each sample, compute its distance to each cluster centroid
                         cost_temp = distance(data[sample,:], centroids_temp[clust,:])
                         if cost_temp < cost:
                             assignment_temp[sample] = clust
