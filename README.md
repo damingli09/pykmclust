@@ -5,4 +5,4 @@ Now under development.
 
 Installation:
 
-git clone to local machine, then open terminal and run pip install .
+git clone to the local machine, then open a terminal and run: pip install .
